@@ -6,7 +6,7 @@ def main():
     g = Graph()
     context = "https://geoconnex.ca/id/catchment/02OJ*AB"
     g.parse(context)
-    conn = psycopg2.connect("dbname=gsip user=gsip password=?gsip?")
+    conn = psycopg2.connect("dbname=gsip user=gsip password=XXXX")
     cur = conn.cursor()
     # delete previous context
     cur.execute("DELETE FROM store.t_resource where ctx_id in (select r_id FROM store.resources where uri = %s)",(context,))

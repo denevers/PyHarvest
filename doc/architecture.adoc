@@ -1,0 +1,20 @@
+GSIP harvester Architecture
+===========================
+Eric Boisvert <eric.boisvert2@canada.ca>
+v1.0, January 2020:
+First version
+
+Introduction
+------------
+
+
+
+TODO: improve documentation
+
+Components
+
+image::overall.png[Overall architecture]
+
+Sequence
+
+image::sequence.png[Sequence diagram]

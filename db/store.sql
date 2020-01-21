@@ -31,42 +31,78 @@ SET search_path = store, pg_catalog;
 
 CREATE FUNCTION insert_literal_triple() RETURNS trigger
     LANGUAGE plpgsql
-    AS $$
-DECLARE 
-	v_s_id store.t_literal.r_id%TYPE;
-	v_p_id store.t_literal.p_id%TYPE;
-	v_c_id store.t_literal.ctx_id%TYPE;
-	v_type_id store.t_literal.l_type%TYPE;
-BEGIN
--- naive implementation, to be improved
--- get a s_id
-	SELECT r_id into v_s_id from store.resources WHERE uri = NEW.subj;
-	IF NOT(FOUND) THEN
-		INSERT INTO store.resources (uri) VALUES (NEW.subj) RETURNING r_id INTO v_s_id;
-	END IF;
--- get a p_id
-	SELECT r_id into v_p_id from store.resources WHERE uri = NEW.pred;
-	IF NOT(FOUND) THEN
-		INSERT INTO store.resources (uri) VALUES (NEW.pred) RETURNING r_id INTO v_p_id;
-	END IF;
-		-- get a type
-	SELECT l_type INTO v_type_id from store.lit_types WHERE type = NEW.type;
-	IF NOT(FOUND) THEN
-		INSERT INTO store.lit_types(type) VALUES(NEW.type) returning l_type INTO v_type_id;
-	END IF;
-
-	
--- get a context
-select r_id into v_c_id from store.resources WHERE uri = NEW.ctx;
-	IF NOT(FOUND) THEN
-		INSERT INTO store.resources (uri) VALUES (NEW.ctx) RETURNING r_id INTO v_c_id;
-	END IF;
-	
--- INSERT this new entry
-INSERT INTO store.t_literal (r_id,p_id,lit,lang,l_type,ctx_id) VALUES (v_s_id,v_p_id,NEW.lit,NEW.lang,v_type_id,v_c_id);
-
-RETURN NEW;
-END;
+    AS $$
+
+DECLARE 
+
+	v_s_id store.t_literal.r_id%TYPE;
+
+	v_p_id store.t_literal.p_id%TYPE;
+
+	v_c_id store.t_literal.ctx_id%TYPE;
+
+	v_type_id store.t_literal.l_type%TYPE;
+
+BEGIN
+
+-- naive implementation, to be improved
+
+-- get a s_id
+
+	SELECT r_id into v_s_id from store.resources WHERE uri = NEW.subj;
+
+	IF NOT(FOUND) THEN
+
+		INSERT INTO store.resources (uri) VALUES (NEW.subj) RETURNING r_id INTO v_s_id;
+
+	END IF;
+
+-- get a p_id
+
+	SELECT r_id into v_p_id from store.resources WHERE uri = NEW.pred;
+
+	IF NOT(FOUND) THEN
+
+		INSERT INTO store.resources (uri) VALUES (NEW.pred) RETURNING r_id INTO v_p_id;
+
+	END IF;
+
+		-- get a type
+
+	SELECT l_type INTO v_type_id from store.lit_types WHERE type = NEW.type;
+
+	IF NOT(FOUND) THEN
+
+		INSERT INTO store.lit_types(type) VALUES(NEW.type) returning l_type INTO v_type_id;
+
+	END IF;
+
+
+
+	
+
+-- get a context
+
+select r_id into v_c_id from store.resources WHERE uri = NEW.ctx;
+
+	IF NOT(FOUND) THEN
+
+		INSERT INTO store.resources (uri) VALUES (NEW.ctx) RETURNING r_id INTO v_c_id;
+
+	END IF;
+
+	
+
+-- INSERT this new entry
+
+INSERT INTO store.t_literal (r_id,p_id,lit,lang,l_type,ctx_id) VALUES (v_s_id,v_p_id,NEW.lit,NEW.lang,v_type_id,v_c_id);
+
+
+
+RETURN NEW;
+
+END;
+
 $$;
 
 
@@ -78,42 +114,78 @@ ALTER FUNCTION store.insert_literal_triple() OWNER TO gsip;
 
 CREATE FUNCTION insert_resource_triple() RETURNS trigger
     LANGUAGE plpgsql
-    AS $$
-DECLARE 
-	v_s_id store.t_resource.r_id%TYPE;
-	v_p_id store.t_resource.p_id%TYPE;
-	v_o_id store.t_resource.o_id%TYPE;
-	v_c_id store.t_resource.ctx_id%TYPE;
-BEGIN
--- naive implementation, to be improved
--- get a s_id
-	SELECT r_id into v_s_id from store.resources WHERE uri = NEW.subj;
-	IF NOT(FOUND) THEN
-		INSERT INTO store.resources (uri) VALUES (NEW.subj) RETURNING r_id INTO v_s_id;
-	END IF;
--- get a p_id
-	SELECT r_id into v_p_id from store.resources WHERE uri = NEW.pred;
-	IF NOT(FOUND) THEN
-		INSERT INTO store.resources (uri) VALUES (NEW.pred) RETURNING r_id INTO v_p_id;
-	END IF;
-		-- get a o_id
-
-SELECT r_id into v_o_id from store.resources WHERE uri = NEW.obj;
-	IF NOT(FOUND) THEN
-		INSERT INTO store.resources (uri) VALUES (NEW.obj) RETURNING r_id INTO v_o_id;
-	END IF;
-	
--- get a context
-select r_id into v_c_id from store.resources WHERE uri = NEW.ctx;
-	IF NOT(FOUND) THEN
-		INSERT INTO store.resources (uri) VALUES (NEW.ctx) RETURNING r_id INTO v_c_id;
-	END IF;
-	
--- INSERT this new entry
-INSERT INTO store.t_resource (r_id,p_id,o_id,ctx_id) VALUES (v_s_id,v_p_id,v_o_id,v_c_id);
-
-RETURN NEW;
-END;
+    AS $$
+
+DECLARE 
+
+	v_s_id store.t_resource.r_id%TYPE;
+
+	v_p_id store.t_resource.p_id%TYPE;
+
+	v_o_id store.t_resource.o_id%TYPE;
+
+	v_c_id store.t_resource.ctx_id%TYPE;
+
+BEGIN
+
+-- naive implementation, to be improved
+
+-- get a s_id
+
+	SELECT r_id into v_s_id from store.resources WHERE uri = NEW.subj;
+
+	IF NOT(FOUND) THEN
+
+		INSERT INTO store.resources (uri) VALUES (NEW.subj) RETURNING r_id INTO v_s_id;
+
+	END IF;
+
+-- get a p_id
+
+	SELECT r_id into v_p_id from store.resources WHERE uri = NEW.pred;
+
+	IF NOT(FOUND) THEN
+
+		INSERT INTO store.resources (uri) VALUES (NEW.pred) RETURNING r_id INTO v_p_id;
+
+	END IF;
+
+		-- get a o_id
+
+
+
+SELECT r_id into v_o_id from store.resources WHERE uri = NEW.obj;
+
+	IF NOT(FOUND) THEN
+
+		INSERT INTO store.resources (uri) VALUES (NEW.obj) RETURNING r_id INTO v_o_id;
+
+	END IF;
+
+	
+
+-- get a context
+
+select r_id into v_c_id from store.resources WHERE uri = NEW.ctx;
+
+	IF NOT(FOUND) THEN
+
+		INSERT INTO store.resources (uri) VALUES (NEW.ctx) RETURNING r_id INTO v_c_id;
+
+	END IF;
+
+	
+
+-- INSERT this new entry
+
+INSERT INTO store.t_resource (r_id,p_id,o_id,ctx_id) VALUES (v_s_id,v_p_id,v_o_id,v_c_id);
+
+
+
+RETURN NEW;
+
+END;
+
 $$;
 
 

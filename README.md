@@ -17,3 +17,7 @@ Those views are also used to insert triples. The views have INSTEAD OF triggers 
  ## Example code
  
  `main.py` shows an simple example of inserting triples into the database
+
+To run this example, you must set an environment `GSIP_HARV_CON_STR` variable with the connection string (eg: `host=localhost dbname=gsip user=gsip password=S3kret`)
+
+

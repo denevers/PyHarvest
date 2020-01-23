@@ -112,3 +112,4 @@ venv.bak/
 .mypy_cache/
 src/data.n3
 src/venv/bin/activate
+src/.vscode/settings.json

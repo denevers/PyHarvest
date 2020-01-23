@@ -4,10 +4,13 @@
 import rdflib
 import requests
 import sys
+import json
 
 from rdflib import URIRef, Graph, plugin
 from rdflib.namespace import DCTERMS, RDF, RDFS
 from rdflib.serializer import Serializer
+
+from datetime import datetime
 
 # MASTER_NODE = "https://geoconnex.ca/id/LOD_Node/CAN_Hydro_LOD_Node"
 MASTER_NODE = "https://cida-test.er.usgs.gov/chyld-pilot/info/LOD_Node/US_Hydro_LOD_Node"
@@ -21,6 +24,9 @@ CONNECTED_PREDICATE = URIRef("https://geoconnex.ca/id/connectedTo")
 nodes = []
 
 def main():
+    crawl()
+
+def crawl():
     """begin harvesting by finding connected nodes"""
     g = rdflib.Graph()
     # g.parse(MASTER_NODE, format='JSON-LD')
@@ -51,6 +57,8 @@ def main():
             continue
 
         harvest_triples(g)
+        
+    return json.dumps({'status':'OK','timestamp': datetime.now().timestamp(), 'nodes': connected_nodes})
 
 def harvest_nodes(node):
     """harvest connected nodes"""

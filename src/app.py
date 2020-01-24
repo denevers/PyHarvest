@@ -4,7 +4,7 @@ import os
 import json
 
 from datetime import datetime
-from flask import Flask, g, render_template, request, jsonify
+from flask import Flask, g, render_template, request, jsonify, Response
 from crawler import crawl
 
 app = Flask(__name__)
@@ -38,11 +38,10 @@ def get_status():
 # initiate harvest task
 @app.route('/harvest', methods=['POST', 'GET'])
 def harvest():
-    response = crawl()
-    return response
+    json = crawl()
+    return Response(json, mimetype='application/json', status='HTTP_200_OK')
 
 app.add_template_filter(format_datetime)
  
 if __name__ == "__main__":
     app.run(debug=True)
-    

@@ -58,7 +58,7 @@ def crawl():
 
         harvest_triples(g)
         
-    return json.dumps({'status':'OK','timestamp': datetime.now().timestamp(), 'nodes': connected_nodes})
+    return json.dumps({'timestamp': datetime.now().timestamp(), 'nodes': connected_nodes})
 
 def harvest_nodes(node):
     """harvest connected nodes"""

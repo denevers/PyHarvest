@@ -15,12 +15,16 @@ $( document ).ready( function () {
             url: '/harvest',
             data: { id: $( this ).data( 'id' ) },
             type: 'GET',
-            success: function( response ) {
+            success: function( response, status, xhr ) {
 
-                var r = $.parseJSON( response ),
+                // console.log( response );
+                // console.log( status );
+                // console.log( xhr.getAllResponseHeaders() );
+
+                var r = response,
                 node_list = '<ul><li><a>' + r.nodes.join('</a></li><li>') + '</li></ul>';
 
-                if (r.status !== 'OK') {
+                if (status !== 'success') {
                     $( '#status' ).html( 'Harvest failed!' );
                 } else {
                     $( '#status' ).html( 'Harvest successful!' );
@@ -35,9 +39,7 @@ $( document ).ready( function () {
 
                 var r = error;
 
-                if (r.status !== 'OK') {
-                    alert( 'ERROR: Harvest failed!' );
-                }
+                alert( 'ERROR: Harvest failed for some inexplicable reason!' );
 
                 $button.attr( 'disabled', false );
                 $( '#status' ).empty();

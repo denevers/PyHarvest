@@ -1,5 +1,5 @@
 # PyHarvest
-Extremely naive harverter.  The key element is the postgresql database that manages resources in such a way that unique URI are kept in a seperate tables and only a reference (id) refers to it.  
+Extremely naive harvester.  The key element is the postgresql database that manages resources in such a way that unique URI are kept in a seperate tables and only a reference (id) refers to it.  
 
 
 ## Data model
@@ -20,4 +20,9 @@ Those views are also used to insert triples. The views have INSTEAD OF triggers 
 
 To run this example, you must set an environment `GSIP_HARV_CON_STR` variable with the connection string (eg: `host=localhost dbname=gsip user=gsip password=S3kret`)
 
+## Running the app
 
+* activate your virtualenv.
+* run: pip install -r requirements.txt
+* run: python app.py
+* navigate to: http://127.0.0.1:5000/

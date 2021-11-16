@@ -113,3 +113,4 @@ venv.bak/
 src/data.n3
 src/venv/bin/activate
 src/.vscode/settings.json
+.vscode/settings.json

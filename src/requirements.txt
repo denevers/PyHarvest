@@ -13,5 +13,5 @@ rdflib==4.2.2
 requests==2.22.0
 six==1.14.0
 tzlocal==2.0.0
-urllib3==1.25.8
+urllib3==1.26.5
 Werkzeug==0.16.0

@@ -10,7 +10,7 @@ MarkupSafe==1.1.1
 pyparsing==2.4.6
 pytz==2019.3
 rdflib==4.2.2
-requests==2.22.0
+requests==2.31.0
 six==1.14.0
 tzlocal==2.0.0
 urllib3==1.26.5

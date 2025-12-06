@@ -5,7 +5,7 @@ Flask==2.3.2
 idna==3.7
 isodate==0.6.0
 itsdangerous==1.1.0
-Jinja2==3.1.4
+Jinja2==3.1.6
 MarkupSafe==1.1.1
 pyparsing==2.4.6
 pytz==2019.3
